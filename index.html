@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>店名 — 首頁</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="store-name">店名</div>
+  <button class="cart-btn" id="cart-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+    購物車
+    <span class="cart-badge" id="cart-count">0</span>
+  </button>
+</header>
+
+<nav>
+    <ul class="type">
+        <li>
+            書本
+            <ul class="submenu">
+                <li>文學小說</li>
+                <li>商業理財</li>
+                <li>心理勵志</li>
+            </ul>
+        </li>
+        <li>
+            文具
+            <ul class="submenu">
+                <li>筆類</li>
+                <li>筆記本</li>
+                <li>貼紙</li>
+            </ul>
+        </li>
+        <li>
+            文創商品
+            <ul class="submenu">
+                <li>明信片</li>
+                <li>杯子</li>
+                <li>帆布袋</li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<!-- BODY -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="ad-block">
+      <div class="ad-label">廣告</div>
+      <div class="ad-sub">Banner · 廣告欄位</div>
+    </div>
+    <div class="ad-block">
+      <div class="ad-label">促銷</div>
+      <div class="ad-sub">限時優惠活動</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="section-title">精選商品</div>
+    <div class="product-grid" id="grid-1"></div>
+    <div class="product-grid" id="grid-2"></div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>
+    <a href="#">官方粉絲團</a>
+    <span class="footer-sep">|</span>
+    <a href="#">聯絡資訊</a>
+    <span class="footer-sep">|</span>
+    <a href="#">地址</a>
+  </span>
+  <span class="footer-copy">© 2026 店名. All rights reserved.</span>
+</footer>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="main.js"></script>
+</body>
+</html>

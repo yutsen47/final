@@ -1,0 +1,340 @@
+:root {
+  --teal-dark:  #98948A;
+  --teal-mid:   #0d737b;
+  --teal-light: #14959f;
+  --accent:     #EAE1DF;
+  --cream:      #f5f0e8;
+  --border:     #7C7A6D;
+  --text-light: #EEEEEE;
+  --text-muted: #EAE1DF;
+  --card-bg:    #0b6268;
+  --radius:     6px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--cream);
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--teal-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── HEADER ───────────────────────────────────────────── */
+header {
+  background: var(--teal-dark);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  height: 100px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 16px rgba(9, 85, 91, 0.4);
+}
+
+.store-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.12em;
+}
+
+.cart-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--text-light);
+  font-size: 1rem;
+  font-family: 'Noto Sans TC', sans-serif;
+  padding: 10px 22px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  position: relative;
+}
+
+.cart-btn:hover {
+  background: var(--teal-mid);
+  border-color: var(--accent);
+}
+
+.cart-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--accent);
+  color: var(--teal-dark);
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── PAGE BODY ────────────────────────────────────────── */
+.page-body {
+  display: flex;
+  flex: 1;
+}
+
+nav{
+    background-color: #B3AEA6;
+    text-align: center;
+    color: #363530;
+}
+
+.type{
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 50px; /* 選單間距 */
+    margin: 0;
+    padding: 20px;
+    font-size: large;
+}
+
+nav li:hover{
+    color: #EAE1DF;
+    transform: scale(1.5); /* 放大 1.2 倍 */
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* 陰影 */
+}
+/* ── SIDEBAR ──────────────────────────────────────────── */
+aside {
+  width: 240px;
+  min-width: 240px;
+  background: var(--teal-dark);
+  border-right: 2px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  gap: 24px;
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
+  min-height: calc(100vh - 100px);
+}
+
+.ad-block {
+  background: var(--teal-mid);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  padding: 28px 12px;
+  text-align: center;
+  color: var(--text-light);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.ad-block:hover {
+  transform: translateY(-3px);
+}
+
+.ad-label {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.2em;
+  margin: 0 auto;
+  color: var(--accent);
+}
+
+.ad-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 14px;
+  letter-spacing: 0.08em;
+}
+
+/* ── MAIN CONTENT ─────────────────────────────────────── */
+main {
+  flex: 1;
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--teal-dark);
+  letter-spacing: 0.1em;
+  border-left: 4px solid var(--teal-dark);
+  padding-left: 12px;
+  margin-bottom: 4px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── PRODUCT CARD ─────────────────────────────────────── */
+.card {
+  background: var(--teal-dark);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(9, 85, 91, 0.35);
+}
+
+.card-img {
+  background: var(--card-bg);
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1.5px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, 0.04) 50%,
+    rgba(255, 255, 255, 0.04) 75%, transparent 75%
+  );
+  background-size: 40px 40px;
+}
+
+.img-placeholder {
+  font-size: 3.5rem;
+  opacity: 0.55;
+  user-select: none;
+}
+
+.card-body {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.price {
+  color: var(--accent);
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.add-cart-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-light);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.85rem;
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.add-cart-btn:hover {
+  background: var(--teal-light);
+  border-color: var(--accent);
+}
+
+.add-cart-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ── FOOTER ───────────────────────────────────────────── */
+footer {
+  background: var(--teal-dark);
+  border-top: 2px solid var(--border);
+  color: var(--text-muted);
+  padding: 0 40px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: var(--accent);
+}
+
+.footer-sep {
+  opacity: 0.35;
+  margin: 0 12px;
+}
+
+.footer-copy {
+  font-size: 0.78rem;
+  opacity: 0.55;
+}
+
+/* ── TOAST ────────────────────────────────────────────── */
+#toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--teal-mid);
+  color: var(--text-light);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 12px 22px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none;
+  z-index: 999;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
