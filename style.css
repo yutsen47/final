@@ -1,14 +1,15 @@
 :root {
-  --teal-dark:  #98948A;
-  --teal-mid:   #0d737b;
-  --teal-light: #14959f;
-  --accent:     #EAE1DF;
-  --cream:      #f5f0e8;
-  --border:     #7C7A6D;
-  --text-light: #EEEEEE;
-  --text-muted: #EAE1DF;
-  --card-bg:    #0b6268;
-  --radius:     6px;
+  --bg:          #1E1D1A;   /* 頁面底色 */
+  --surface:     #141412;   /* header / footer / sidebar */
+  --surface-mid: #252320;   /* nav */
+  --card:        #2C2B27;   /* 商品卡片 */
+  --card-img:    #222120;   /* 卡片圖片區 */
+  --hover:       #3A3732;   /* hover 填色 */
+  --accent:      #C4A882;   /* 暖金 — 強調色 */
+  --border:      #3A3732;   /* 邊框 */
+  --text:        #E8E2DB;   /* 主要文字 */
+  --text-muted:  #8A8680;   /* 次要文字 */
+  --radius:      6px;
 }
 
 *, *::before, *::after {
@@ -18,9 +19,9 @@
 }
 
 body {
-  background: var(--cream);
+  background: var(--bg);
   font-family: 'Noto Sans TC', sans-serif;
-  color: var(--teal-dark);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -28,8 +29,8 @@ body {
 
 /* ── HEADER ───────────────────────────────────────────── */
 header {
-  background: var(--teal-dark);
-  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -38,15 +39,16 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 2px 16px rgba(9, 85, 91, 0.4);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
 }
 
 .store-name {
   font-family: 'Noto Serif TC', serif;
   font-size: 2.2rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text);
   letter-spacing: 0.12em;
+  text-decoration: none;
 }
 
 .cart-btn {
@@ -54,8 +56,8 @@ header {
   align-items: center;
   gap: 10px;
   background: transparent;
-  border: 2px solid var(--border);
-  color: var(--text-light);
+  border: 1.5px solid var(--border);
+  color: var(--text);
   font-size: 1rem;
   font-family: 'Noto Sans TC', sans-serif;
   padding: 10px 22px;
@@ -63,10 +65,11 @@ header {
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
   position: relative;
+  overflow: hidden;
 }
 
 .cart-btn:hover {
-  background: var(--teal-mid);
+  background: var(--hover);
   border-color: var(--accent);
 }
 
@@ -80,7 +83,7 @@ header {
   top: -8px;
   right: -8px;
   background: var(--accent);
-  color: var(--teal-dark);
+  color: var(--surface);
   font-size: 0.7rem;
   font-weight: 700;
   border-radius: 50%;
@@ -91,39 +94,98 @@ header {
   justify-content: center;
 }
 
+.cart-badge.bounce {
+  animation: badge-bounce 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+nav {
+  background: var(--surface-mid);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  z-index: 90;
+}
+
+.type {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 50px;
+  margin: 0;
+  padding: 16px 20px;
+  font-size: large;
+}
+
+.type > li {
+  position: relative;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding-bottom: 8px; /* 橋接 submenu 上方空白，hover 不中斷 */
+}
+
+.nav-label {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.type > li:hover .nav-label {
+  color: var(--accent);
+  transform: scale(1.12);
+}
+
+/* ── SUBMENU ──────────────────────────────────────────── */
+.submenu {
+  position: absolute;
+  top: 100%; /* li 的 padding-bottom 已橋接，不需額外 gap */
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  list-style: none;
+  padding: 6px 0;
+  min-width: 110px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+  z-index: 200;
+}
+
+.type > li:hover .submenu {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.submenu li {
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.submenu li:hover {
+  background: var(--hover);
+  color: var(--text);
+}
+
 /* ── PAGE BODY ────────────────────────────────────────── */
 .page-body {
   display: flex;
   flex: 1;
 }
 
-nav{
-    background-color: #B3AEA6;
-    text-align: center;
-    color: #363530;
-}
-
-.type{
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 50px; /* 選單間距 */
-    margin: 0;
-    padding: 20px;
-    font-size: large;
-}
-
-nav li:hover{
-    color: #EAE1DF;
-    transform: scale(1.5); /* 放大 1.2 倍 */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* 陰影 */
-}
 /* ── SIDEBAR ──────────────────────────────────────────── */
 aside {
   width: 240px;
   min-width: 240px;
-  background: var(--teal-dark);
-  border-right: 2px solid var(--border);
+  background: var(--surface);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,19 +199,20 @@ aside {
 }
 
 .ad-block {
-  background: var(--teal-mid);
-  border: 1.5px solid var(--border);
+  background: var(--hover);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   width: 100%;
   padding: 28px 12px;
   text-align: center;
-  color: var(--text-light);
-  transition: transform 0.2s;
+  color: var(--text);
+  transition: transform 0.2s, box-shadow 0.2s;
   cursor: pointer;
 }
 
 .ad-block:hover {
   transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
 .ad-label {
@@ -178,70 +241,117 @@ main {
   gap: 32px;
 }
 
-.section-title {
-  font-family: 'Noto Serif TC', serif;
-  font-size: 1.1rem;
-  color: var(--teal-dark);
-  letter-spacing: 0.1em;
-  border-left: 4px solid var(--teal-dark);
-  padding-left: 12px;
-  margin-bottom: 4px;
-}
-
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* ── CATEGORY SECTIONS ────────────────────────────────── */
+.category-section {
+  padding-bottom: 40px;
+  scroll-margin-top: 160px;
+}
+
+.category-section + .category-section {
+  border-top: 1px solid var(--border);
+  padding-top: 36px;
+}
+
+.category-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.18em;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.category-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.subcategory {
+  margin-bottom: 28px;
+}
+
+.subcategory-title {
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  border-left: 3px solid var(--accent);
+  padding-left: 10px;
+  margin-bottom: 14px;
 }
 
 /* ── PRODUCT CARD ─────────────────────────────────────── */
 .card {
-  background: var(--teal-dark);
-  border: 1.5px solid var(--border);
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s;
+  animation: card-in 0.45s both;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(9, 85, 91, 0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  border-color: var(--accent);
 }
 
 .card-img {
-  background: var(--card-bg);
-  height: 200px;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--card-img);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1.5px solid var(--border);
-  position: relative;
-  overflow: hidden;
+  padding: 12px;
 }
 
-.card-img::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.04) 25%, transparent 25%,
-    transparent 50%, rgba(255, 255, 255, 0.04) 50%,
-    rgba(255, 255, 255, 0.04) 75%, transparent 75%
-  );
-  background-size: 40px 40px;
+.card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.35s ease;
+  border-radius: 2px;
 }
 
-.img-placeholder {
-  font-size: 3.5rem;
-  opacity: 0.55;
-  user-select: none;
+.card:hover .card-img img {
+  transform: scale(1.04);
 }
 
 .card-body {
-  padding: 14px 16px;
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -251,41 +361,49 @@ main {
 .price {
   color: var(--accent);
   font-family: 'Noto Serif TC', serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   letter-spacing: 0.05em;
 }
 
 .add-cart-btn {
   background: transparent;
-  border: 1.5px solid var(--border);
-  color: var(--text-light);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
   font-family: 'Noto Sans TC', sans-serif;
-  font-size: 0.85rem;
-  padding: 7px 14px;
+  font-size: 0.82rem;
+  padding: 6px 12px;
   border-radius: var(--radius);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
-  transition: background 0.2s, border-color 0.2s;
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
   white-space: nowrap;
+  position: relative;
+  overflow: hidden;
 }
 
 .add-cart-btn:hover {
-  background: var(--teal-light);
+  background: var(--accent);
   border-color: var(--accent);
+  color: var(--surface);
+}
+
+.add-cart-btn:active {
+  transform: scale(0.94);
 }
 
 .add-cart-btn svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 
 /* ── FOOTER ───────────────────────────────────────────── */
 footer {
-  background: var(--teal-dark);
-  border-top: 2px solid var(--border);
+  background: var(--surface);
+  border-top: 1px solid var(--border);
   color: var(--text-muted);
   padding: 0 40px;
   height: 60px;
@@ -307,13 +425,13 @@ footer a:hover {
 }
 
 .footer-sep {
-  opacity: 0.35;
+  opacity: 0.25;
   margin: 0 12px;
 }
 
 .footer-copy {
   font-size: 0.78rem;
-  opacity: 0.55;
+  opacity: 0.4;
 }
 
 /* ── TOAST ────────────────────────────────────────────── */
@@ -321,9 +439,9 @@ footer a:hover {
   position: fixed;
   bottom: 32px;
   right: 32px;
-  background: var(--teal-mid);
-  color: var(--text-light);
-  border: 1.5px solid var(--accent);
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
   border-radius: var(--radius);
   padding: 12px 22px;
   font-size: 0.9rem;
@@ -337,4 +455,399 @@ footer a:hover {
 #toast.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ── ANIMATIONS ───────────────────────────────────────── */
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes badge-bounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.65); }
+  60%  { transform: scale(0.88); }
+  80%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ── RIPPLE ───────────────────────────────────────────── */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(196, 168, 130, 0.25);
+  transform: scale(0);
+  animation: ripple-expand 0.55s linear forwards;
+  pointer-events: none;
+}
+
+@keyframes ripple-expand {
+  to { transform: scale(1); opacity: 0; }
+}
+
+/* ── HEADER 右側（登入/會員） ────────────────────────── */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-auth-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  padding: 7px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.header-auth-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-user-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.header-user-link:hover { color: var(--accent); }
+.header-logout-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: color 0.2s, background 0.2s;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.header-logout-btn:hover { color: var(--text); background: var(--hover); }
+
+/* ── MODAL OVERLAY ────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.modal-overlay.visible { opacity: 1; pointer-events: auto; }
+
+.modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 32px 36px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+.modal-x {
+  position: absolute;
+  top: 14px; right: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius);
+  transition: color 0.2s;
+}
+.modal-x:hover { color: var(--text); }
+
+/* ── AUTH MODAL ───────────────────────────────────────── */
+.modal-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.modal-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+.modal-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.auth-error {
+  background: rgba(180, 60, 60, 0.15);
+  border: 1px solid rgba(200, 80, 80, 0.4);
+  color: #e08080;
+  font-size: 0.82rem;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+.form-group input {
+  width: 100%;
+  background: var(--card-img);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus { border-color: var(--accent); }
+
+.form-submit {
+  width: 100%;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--surface);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity 0.2s;
+}
+.form-submit:hover { opacity: 0.85; }
+
+/* ── CART DRAWER ──────────────────────────────────────── */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 400;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.drawer-overlay.visible { opacity: 1; pointer-events: auto; }
+
+.cart-drawer {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 380px;
+  max-width: 92vw;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -8px 0 32px rgba(0,0,0,0.4);
+}
+.drawer-overlay.visible .cart-drawer { transform: translateX(0); }
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.drawer-header h3 {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.05rem;
+  color: var(--text);
+  letter-spacing: 0.1em;
+}
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+.drawer-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cart-total-text {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 100%;
+  min-height: 180px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.cart-item-img {
+  width: 56px;
+  height: 72px;
+  object-fit: contain;
+  background: var(--card-img);
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name {
+  font-size: 0.82rem;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+.cart-item-price { font-size: 0.82rem; color: var(--accent); }
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.qty-btn {
+  background: var(--hover);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 24px; height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: background 0.15s, color 0.15s;
+}
+.qty-btn:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.cart-remove {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.cart-remove:hover { color: #e08080; }
+
+/* ── CHECKOUT MODAL ───────────────────────────────────── */
+.checkout-modal { max-width: 480px; }
+.modal-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+.checkout-items { margin-bottom: 16px; max-height: 300px; overflow-y: auto; }
+.checkout-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.checkout-thumb {
+  width: 44px;
+  height: 56px;
+  object-fit: contain;
+  background: var(--card-img);
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.checkout-row-name  { flex: 1; color: var(--text); }
+.checkout-row-qty   { color: var(--text-muted); white-space: nowrap; }
+.checkout-row-price { color: var(--accent); white-space: nowrap; }
+.checkout-total {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-align: right;
+  padding: 12px 0 4px;
+}
+.modal-actions { display: flex; gap: 12px; margin-top: 20px; }
+
+/* ── BUTTON VARIANTS ──────────────────────────────────── */
+.btn-accent {
+  flex: 1;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--surface);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-accent:hover { opacity: 0.85; }
+.btn-ghost {
+  flex: 1;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 0.88rem;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+
+/* ── TOAST error variant ──────────────────────────────── */
+#toast.error {
+  border-color: rgba(200, 80, 80, 0.6);
+  color: #e09090;
 }

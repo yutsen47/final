@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>店名 — 會員中心</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="member.css" />
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="store-name">店名</a>
+  <div class="header-right">
+    <button class="header-auth-btn" id="auth-btn">登入 / 註冊</button>
+    <div class="header-user" id="user-info" hidden>
+      <a href="member.html" class="header-user-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span id="header-username"></span>
+      </a>
+      <button class="header-logout-btn" id="logout-btn">登出</button>
+    </div>
+    <button class="cart-btn" id="cart-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      購物車
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="member-page">
+
+  <!-- 未登入提示（預設隱藏，由 JS 決定是否顯示） -->
+  <div class="member-login-prompt" id="login-prompt" hidden>
+    <p>請先登入以查看會員資料</p>
+    <button class="btn-accent" onclick="showAuthModal()" style="flex:0;padding:10px 32px">前往登入</button>
+  </div>
+
+  <!-- 會員內容（預設隱藏） -->
+  <div class="member-content" id="member-content" hidden>
+
+    <!-- 個人資料 -->
+    <section class="member-section">
+      <h2 class="member-section-title">個人資料</h2>
+
+      <div class="profile-card">
+        <div class="profile-avatar" id="profile-avatar">U</div>
+        <div class="profile-card-info">
+          <div class="profile-name" id="profile-name">—</div>
+          <div class="profile-since" id="profile-since">—</div>
+        </div>
+      </div>
+
+      <!-- 可編輯欄位 -->
+      <form class="profile-edit-form" id="profile-edit-form">
+        <div class="profile-fields">
+          <div class="profile-field">
+            <label for="edit-email">信箱</label>
+            <input type="email" id="edit-email" placeholder="請輸入 Email（選填）" />
+          </div>
+          <div class="profile-field">
+            <label for="edit-phone">電話</label>
+            <input type="tel" id="edit-phone" placeholder="請輸入聯絡電話（選填）" />
+          </div>
+          <div class="profile-field">
+            <label for="edit-address">地址</label>
+            <input type="text" id="edit-address" placeholder="請輸入收件地址（選填）" />
+          </div>
+        </div>
+        <div class="profile-save-row">
+          <button type="submit" class="btn-accent profile-save-btn">儲存資料</button>
+          <span class="save-feedback" id="save-feedback" hidden>✓ 已儲存</span>
+        </div>
+      </form>
+    </section>
+
+    <!-- 訂單記錄 -->
+    <section class="member-section">
+      <h2 class="member-section-title">訂單記錄</h2>
+      <p class="orders-empty" id="orders-empty" hidden>尚無訂單記錄</p>
+      <div id="orders-list"></div>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <span>
+    <a href="#">官方粉絲團</a>
+    <span class="footer-sep">|</span>
+    <a href="#">聯絡資訊</a>
+    <span class="footer-sep">|</span>
+    <a href="#">地址</a>
+  </span>
+  <span class="footer-copy">© 2026 店名. All rights reserved.</span>
+</footer>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+<script src="shared.js"></script>
+<script src="member.js"></script>
+</body>
+</html>
