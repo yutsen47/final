@@ -1,4 +1,15 @@
-let cardIndex = 0;
+const products = [
+  { id: 1, img: 'img/2025eslite_top10_yearend01.jpg', name: '商品一', price: 'NT$ 380' },
+  { id: 2, img: 'img/2025eslite_top10_yearend02.jpg', name: '商品二', price: 'NT$ 520' },
+  { id: 3, img: 'img/2025eslite_top10_yearend03.jpg', name: '商品三', price: 'NT$ 290' },
+  { id: 4, img: 'img/2025eslite_top10_yearend04.jpg', name: '商品四', price: 'NT$ 450' },
+  { id: 5, img: 'img/2025eslite_top10_yearend05.jpg', name: '商品五', price: 'NT$ 680' },
+  { id: 6, img: 'img/2025eslite_top10_yearend06.jpg', name: '商品六', price: 'NT$ 350' },
+  { id: 7, img: 'img/2025eslite_top10_yearend07.jpg', name: '商品一', price: 'NT$ 380' },
+  { id: 8, img: 'img/2025eslite_top10_yearend08.jpg', name: '商品二', price: 'NT$ 520' },
+  { id: 9, img: 'img/2025eslite_top10_yearend09.jpg', name: '商品三', price: 'NT$ 290' },
+   { id: 10, img: 'img/2025eslite_top10_yearend10.jpg', name: '商品三', price: 'NT$ 290' },
+];
 
 function buildCard(p) {
   const card = document.createElement('div');
