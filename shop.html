@@ -3,17 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>店名 — 首頁</title>
+  <title>店名 — 商店</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="home.css" />
 </head>
 <body>
 
 <header>
   <a href="index.html" class="store-name">店名</a>
   <div class="header-right">
-    <a href="shop.html" class="shop-link">全部商品</a>
     <button class="header-auth-btn" id="auth-btn">登入 / 註冊</button>
     <div class="header-user" id="user-info" hidden>
       <a href="member.html" class="header-user-link">
@@ -65,23 +63,9 @@
   </ul>
 </nav>
 
-<section class="hero-carousel" id="hero-carousel">
-  <div class="carousel-track" id="carousel-track"></div>
-  <div class="carousel-progress-bar" id="carousel-progress"></div>
-  <div class="carousel-dots" id="carousel-dots"></div>
-  <button class="carousel-nav prev" id="carousel-prev">&#8249;</button>
-  <button class="carousel-nav next" id="carousel-next">&#8250;</button>
-</section>
-
-<section class="bestsellers-section">
-  <div class="bestsellers-inner">
-    <div class="home-section-header">
-      <h2 class="home-section-title">暢銷商品</h2>
-      <a href="shop.html" class="view-all-link">查看全部 →</a>
-    </div>
-    <div class="product-grid" id="bestsellers-grid"></div>
-  </div>
-</section>
+<main>
+  <div id="product-sections"></div>
+</main>
 
 <footer>
   <span>
@@ -98,7 +82,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
 <script src="data.js"></script>
-<script src="home.js"></script>
+<script src="main.js"></script>
 <script src="shared.js"></script>
 </body>
 </html>
