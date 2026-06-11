@@ -8,8 +8,7 @@ const products = [
   { id: 7, img: 'img/2025eslite_top10_yearend07.jpg', name: '商品一', price: 'NT$ 380' },
   { id: 8, img: 'img/2025eslite_top10_yearend08.jpg', name: '商品二', price: 'NT$ 520' },
   { id: 9, img: 'img/2025eslite_top10_yearend09.jpg', name: '商品三', price: 'NT$ 290' },
-  { id: 10, img: 'img/2025eslite_top10_yearend10.jpg', name: '商品四', price: 'NT$ 450' },
-  { id: 11, img: 'img/fire01.jpg', name: '商品五', price: 'NT$ 680' },
+   { id: 10, img: 'img/2025eslite_top10_yearend10.jpg', name: '商品三', price: 'NT$ 290' },
 ];
 
 let cartCount = 0;

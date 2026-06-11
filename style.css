@@ -98,25 +98,51 @@ header {
 }
 
 nav{
-    background-color: #B3AEA6;
-    text-align: center;
-    color: #363530;
+  background-color: #D8D2CB;
 }
 
 .type{
     display: flex;
     justify-content: center;
     list-style: none;
-    gap: 50px; /* 選單間距 */
-    margin: 0;
-    padding: 20px;
-    font-size: large;
+    gap: 50px;
 }
 
-nav li:hover{
-    color: #EAE1DF;
-    transform: scale(1.5); /* 放大 1.2 倍 */
-    text-shadow: 2px 2px 5px rgba(0,0,0,0.3); /* 陰影 */
+.type > li{
+    position: relative;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* 預設隱藏子選單 */
+.submenu{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    background-color: #E6E2DD;
+    width: 180px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* 子選單項目 */
+.submenu li{
+    padding: 12px;
+    text-align: center;
+}
+
+.submenu li:hover{
+    background-color: #D8D2CB;
+}
+
+/* 滑鼠碰到主選單時顯示 */
+.type > li:hover .submenu{
+    display: block;
 }
 /* ── SIDEBAR ──────────────────────────────────────────── */
 aside {
