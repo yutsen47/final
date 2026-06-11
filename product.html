@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>商品詳情 — 店名</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="store-name">店名</a>
+  <div class="header-right">
+    <a href="shop.html" class="shop-link">全部商品</a>
+    <button class="header-auth-btn" id="auth-btn">登入 / 註冊</button>
+    <div class="header-user" id="user-info" hidden>
+      <a href="member.html" class="header-user-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="18" height="18">
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+        </svg>
+        <span id="header-username"></span>
+      </a>
+      <button class="header-logout-btn" id="logout-btn">登出</button>
+    </div>
+    <button class="cart-btn" id="cart-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      購物車
+      <span class="cart-badge" id="cart-count">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <ul class="type">
+    <li data-cat-id="books">
+      <span class="nav-label">書本</span>
+      <ul class="submenu">
+        <li data-sub-id="fiction">文學小說</li>
+        <li data-sub-id="business">商業理財</li>
+        <li data-sub-id="psychology">心理勵志</li>
+      </ul>
+    </li>
+    <li data-cat-id="stationery">
+      <span class="nav-label">文具</span>
+      <ul class="submenu">
+        <li data-sub-id="pens">筆類</li>
+        <li data-sub-id="notebooks">筆記本</li>
+        <li data-sub-id="stickers">貼紙</li>
+      </ul>
+    </li>
+    <li data-cat-id="creative">
+      <span class="nav-label">文創商品</span>
+      <ul class="submenu">
+        <li data-sub-id="postcards">明信片</li>
+        <li data-sub-id="cups">杯子</li>
+        <li data-sub-id="bags">帆布袋</li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<!-- ===== BREADCRUMB ===== -->
+<div class="pd-breadcrumb" id="pd-breadcrumb">
+  <a href="index.html">首頁</a>
+  <span class="bc-sep">›</span>
+  <a href="shop.html" id="bc-category">全部商品</a>
+  <span class="bc-sep">›</span>
+  <span id="bc-product">商品名稱</span>
+</div>
+
+<!-- ===== MAIN PRODUCT SECTION ===== -->
+<main class="pd-main">
+
+  <!-- LEFT: image gallery -->
+  <div class="pd-gallery">
+    <div class="pd-main-img-wrap">
+      <img id="pd-main-img" src="" alt="商品圖片" />
+    </div>
+    <div class="pd-thumbs" id="pd-thumbs">
+      <!-- thumbnails injected by JS (for now, single image) -->
+    </div>
+  </div>
+
+  <!-- RIGHT: info panel -->
+  <div class="pd-info">
+
+    <p class="pd-category-tag" id="pd-cat-tag">分類</p>
+    <h1 class="pd-name" id="pd-name">商品名稱</h1>
+
+    <!-- Star rating summary -->
+    <div class="pd-rating-row">
+      <div class="pd-stars" id="pd-stars-summary">
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star filled">★</span>
+        <span class="star half">★</span>
+      </div>
+      <span class="pd-rating-score" id="pd-rating-score">4.5</span>
+      <span class="pd-rating-count" id="pd-rating-count">（12 則評價）</span>
+    </div>
+
+    <div class="pd-price-row">
+      <span class="pd-price" id="pd-price">NT$ 380</span>
+      <span class="pd-stock" id="pd-stock">庫存充足</span>
+    </div>
+
+    <div class="pd-divider"></div>
+
+    <!-- Description -->
+    <div class="pd-desc-block">
+      <h3 class="pd-desc-title">商品介紹</h3>
+      <p class="pd-desc-text" id="pd-desc">
+        載入中…
+      </p>
+    </div>
+
+    <!-- Specs table -->
+    <div class="pd-specs-block" id="pd-specs-block">
+      <h3 class="pd-desc-title">商品規格</h3>
+      <table class="pd-specs-table" id="pd-specs-table">
+        <!-- rows injected by JS -->
+      </table>
+    </div>
+
+    <!-- Qty + Add to cart -->
+    <div class="pd-actions">
+      <div class="pd-qty-wrap">
+        <button class="pd-qty-btn" id="qty-minus">－</button>
+        <input class="pd-qty-input" id="pd-qty" type="number" value="1" min="1" max="99" />
+        <button class="pd-qty-btn" id="qty-plus">＋</button>
+      </div>
+      <button class="pd-add-cart-btn" id="pd-add-cart">加入購物車</button>
+      <button class="pd-wishlist-btn" id="pd-wishlist" title="加入收藏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="20" height="20">
+          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Tags -->
+    <div class="pd-tags" id="pd-tags"></div>
+
+  </div>
+</main>
+
+<!-- ===== REVIEWS SECTION ===== -->
+<section class="pd-reviews-section">
+  <div class="pd-reviews-inner">
+    <h2 class="pd-reviews-title">買家評價</h2>
+
+    <!-- Rating breakdown -->
+    <div class="pd-rating-breakdown" id="pd-rating-breakdown">
+      <div class="pd-big-score">
+        <span class="pbs-number" id="pbs-number">4.5</span>
+        <div class="pbs-stars" id="pbs-stars"></div>
+        <span class="pbs-total" id="pbs-total">12 則評價</span>
+      </div>
+      <div class="pd-bar-chart" id="pd-bar-chart">
+        <!-- 5 bars injected by JS -->
+      </div>
+    </div>
+
+    <!-- Review list -->
+    <div class="pd-review-list" id="pd-review-list">
+      <!-- review cards injected by JS -->
+    </div>
+
+    <!-- Write review -->
+    <div class="pd-write-review">
+      <h3 class="pd-write-title">撰寫評價</h3>
+      <div class="pd-star-picker" id="pd-star-picker">
+        <span class="pick-star" data-v="1">★</span>
+        <span class="pick-star" data-v="2">★</span>
+        <span class="pick-star" data-v="3">★</span>
+        <span class="pick-star" data-v="4">★</span>
+        <span class="pick-star" data-v="5">★</span>
+      </div>
+      <input class="pd-review-author" id="pd-review-author" type="text" placeholder="您的暱稱" maxlength="20" />
+      <textarea class="pd-review-textarea" id="pd-review-text" placeholder="分享您的使用心得…" maxlength="300" rows="4"></textarea>
+      <button class="pd-review-submit" id="pd-review-submit">送出評價</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== RELATED PRODUCTS ===== -->
+<section class="pd-related-section">
+  <div class="pd-related-inner">
+    <h2 class="pd-section-title">同類商品</h2>
+    <div class="product-grid" id="pd-related-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <span>
+    <a href="#">官方粉絲團</a>
+    <span class="footer-sep">|</span>
+    <a href="#">聯絡資訊</a>
+    <span class="footer-sep">|</span>
+    <a href="#">地址</a>
+  </span>
+  <span class="footer-copy">© 2026 店名. All rights reserved.</span>
+</footer>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script src="product.js"></script>
+</body>
+</html>

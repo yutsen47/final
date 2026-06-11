@@ -65,7 +65,6 @@ header {
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s;
   position: relative;
-  overflow: hidden;
 }
 
 .cart-btn:hover {

@@ -7,9 +7,11 @@ function buildCard(p) {
   card.style.animationDelay = `${cardIndex * 0.05}s`;
   cardIndex++;
   card.innerHTML = `
-    <div class="card-img">
-      <img src="${p.img}" alt="${p.name}" loading="lazy" />
-    </div>
+    <a href="product.html?id=${p.id}" class="card-img-link">
+      <div class="card-img">
+        <img src="${p.img}" alt="${p.name}" loading="lazy" />
+      </div>
+    </a>
     <div class="card-body">
       <div class="card-name">${p.name}</div>
       <div class="card-footer">

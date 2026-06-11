@@ -28,7 +28,7 @@ function buildSlide(p, index) {
         <span class="slide-badge">精選推薦</span>
         <h2 class="slide-name">${p.name}</h2>
         <p class="slide-price">${p.price}</p>
-        <a href="shop.html#product-${p.id}" class="slide-cta">立即選購</a>
+        <a href="product.html?id=${p.id}" class="slide-cta">立即選購</a>
       </div>
     </div>
   `;
@@ -92,7 +92,7 @@ function renderBestsellers() {
     card.id = `product-${p.id}`;
     card.style.animationDelay = `${i * 0.07}s`;
     card.innerHTML = `
-      <a href="shop.html#product-${p.id}" class="card-img-link">
+      <a href="product.html?id=${p.id}" class="card-img-link">
         <div class="card-img">
           <img src="${p.img}" alt="${p.name}" loading="lazy" />
         </div>
