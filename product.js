@@ -367,3 +367,18 @@ function showToast(msg) {
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove('show'), 2400);
 }
+
+document.querySelector('nav').addEventListener('click', e => {
+  const subItem = e.target.closest('li[data-sub-id]');
+  if (subItem) {
+    const catItem = subItem.closest('li[data-cat-id]');
+    const catId = catItem.dataset.catId;
+    const subId = subItem.dataset.subId;
+    window.location.href = `shop.html#sub-${catId}-${subId}`;
+    return;
+  }
+  const catItem = e.target.closest('li[data-cat-id]');
+  if (catItem) {
+    window.location.href = `shop.html#cat-${catItem.dataset.catId}`;
+  }
+});

@@ -1,3 +1,5 @@
+let cardIndex = 0;
+
 const products = [
   { id: 1, img: 'img/2025eslite_top10_yearend01.jpg', name: '商品一', price: 'NT$ 380' },
   { id: 2, img: 'img/2025eslite_top10_yearend02.jpg', name: '商品二', price: 'NT$ 520' },
@@ -79,27 +81,26 @@ function renderAll() {
 }
 
 // Nav 捲動（shop.html 專用）
-document.addEventListener('click', e => {
-  const subItem = e.target.closest('.submenu li');
+document.querySelector('nav').addEventListener('click', e => {
+  const subItem = e.target.closest('li[data-sub-id]');
   if (subItem) {
-    const catId = subItem.closest('.type > li').dataset.catId;
+    const catItem = subItem.closest('li[data-cat-id]');
+    const catId = catItem.dataset.catId;
     const subId = subItem.dataset.subId;
-    document.getElementById(`sub-${catId}-${subId}`)?.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = `shop.html#sub-${catId}-${subId}`;
     return;
   }
-  const navLabel = e.target.closest('.nav-label');
-  if (navLabel) {
-    const catId = navLabel.closest('.type > li').dataset.catId;
-    document.getElementById(`cat-${catId}`)?.scrollIntoView({ behavior: 'smooth' });
+  const catItem = e.target.closest('li[data-cat-id]');
+  if (catItem) {
+    window.location.href = `shop.html#cat-${catItem.dataset.catId}`;
   }
 });
 
-// 從廣告輪播連結跳過來時捲動到指定商品
+renderAll();  // 先建好所有區塊
+
 window.addEventListener('load', () => {
   if (location.hash) {
     const el = document.querySelector(location.hash);
-    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 });
-
-renderAll();
