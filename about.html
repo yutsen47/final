@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>療癒書屋 — 首頁</title>
+  <title>組員介紹</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="home.css" />
+  <link rel="stylesheet" href="about.css" />
 </head>
 <body>
 
@@ -42,69 +42,48 @@
   </div>
 </header>
 
-<nav>
-  <ul class="type">
-    <li data-cat-id="books">
-      <span class="nav-label">書本</span>
-      <ul class="submenu">
-        <li data-sub-id="fiction">文學小說</li>
-        <li data-sub-id="business">商業理財</li>
-        <li data-sub-id="psychology">心理勵志</li>
-      </ul>
-    </li>
-    <li data-cat-id="stationery">
-      <span class="nav-label">文具</span>
-      <ul class="submenu">
-        <li data-sub-id="pens">筆類</li>
-        <li data-sub-id="notebooks">筆記本</li>
-        <li data-sub-id="fire">火漆</li>
-      </ul>
-    </li>
-    <li data-cat-id="creative">
-      <span class="nav-label">文創商品</span>
-      <ul class="submenu">
-        <li data-sub-id="type">紙膠帶</li>
-        <li data-sub-id="others">聯名商品</li>
-        <li data-sub-id="stamp">印章</li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<main class="about-main">
+  <h1 class="about-title">組員介紹</h1>
+  <div class="about-grid">
 
-<section class="hero-carousel" id="hero-carousel">
-  <div class="carousel-track" id="carousel-track"></div>
-  <div class="carousel-progress-bar" id="carousel-progress"></div>
-  <div class="carousel-dots" id="carousel-dots"></div>
-  <button class="carousel-nav prev" id="carousel-prev">&#8249;</button>
-  <button class="carousel-nav next" id="carousel-next">&#8250;</button>
-</section>
-
-<section class="bestsellers-section">
-  <div class="bestsellers-inner">
-    <div class="home-section-header">
-      <h2 class="home-section-title">暢銷商品</h2>
-      <a href="shop.html" class="view-all-link">查看全部 →</a>
+    <div class="about-card">
+      <div class="about-num">%</div>
+      <h3 class="about-name">巫勝諺</h3>
+      <p class="about-role">負責項目：首頁設計與製作、首頁功能製作、後端開發、RWD響應式開發</p>
     </div>
-    <div class="product-grid" id="bestsellers-grid"></div>
+
+    <div class="about-card">
+      <div class="about-num">%</div>
+      <h3 class="about-name">邱聿岑</h3>
+      <p class="about-role">負責項目：商品頁設計與製作、商品頁功能製作、組員介紹頁面製作</p>
+    </div>
+
+    <div class="about-card">
+      <div class="about-num">%</div>
+      <h3 class="about-name">邱心姚</h3>
+      <p class="about-role">負責項目：分類頁面製作、首頁功能製作、文書處理</p>
+    </div>
+
+    <h1 class="about-title">網站介紹與發想</h1>
+      <p class="about-intro">此網站為提供線上購買文創以及書本的平台。主要販售各類書籍與文具商品，讓使用者能透過簡單便利的方式瀏覽商品、查詢資訊及完成購買流程。近年來，網路購物逐漸成為主要消費方式，因此本專案希望結合電商網站常見功能與良好的使用者介面，打造一個兼具實用性與美觀性的購物平台。除了基本商品展示功能外，也會加入會員系統、商品分類、購物車等功能，提升網站完整度與使用體驗。</p>
+
+    
   </div>
-</section>
+</main>
 
 <footer>
   <span>
     <a href="#">官方粉絲團</a>
     <span class="footer-sep">|</span>
-    <a href="#">聯絡資訊：03-666-6666</a>
+    <a href="#">聯絡資訊</a>
     <span class="footer-sep">|</span>
     <a href="#">地址</a>
   </span>
-  <span class="footer-copy">© 2026 療癒書屋. All rights reserved.</span>
+  <span class="footer-copy">© 2026 店名. All rights reserved.</span>
 </footer>
-
-<div id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
 <script src="data.js"></script>
-<script src="home.js"></script>
 <script src="shared.js"></script>
 </body>
 </html>

@@ -1,0 +1,73 @@
+.about-main {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.about-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 2rem;
+  color: var(--text);
+  margin-bottom: 40px;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 16px;
+}
+
+.about-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.about-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.about-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+  border-color: var(--accent);
+}
+
+.about-num {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--hover);
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.8rem;
+  color: var(--accent);
+  border: 2px solid var(--border);
+}
+
+.about-name {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.about-role {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+about-intro{
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}

@@ -28,7 +28,9 @@ function buildSlide(p, index) {
         <span class="slide-badge">精選推薦</span>
         <h2 class="slide-name">${p.name}</h2>
         <p class="slide-price">${p.price}</p>
-        <a href="product.html?id=${p.id}" class="slide-cta">立即選購</a>
+        <a href="product.html?id=${p.id}">
+          <img class="slide-img" src="${p.img}" alt="${p.name}" />
+        </a>
       </div>
     </div>
   `;
