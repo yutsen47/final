@@ -1,14 +1,14 @@
 :root {
-  --bg:          #1E1D1A;   /* 頁面底色 */
-  --surface:     #141412;   /* header / footer / sidebar */
+  --bg:          #1E1D1A;   /* 底色 */
+  --surface:     #141412;   
   --surface-mid: #252320;   /* nav */
-  --card:        #2C2B27;   /* 商品卡片 */
-  --card-img:    #222120;   /* 卡片圖片區 */
-  --hover:       #3A3732;   /* hover 填色 */
-  --accent:      #C4A882;   /* 暖金 — 強調色 */
-  --border:      #3A3732;   /* 邊框 */
-  --text:        #E8E2DB;   /* 主要文字 */
-  --text-muted:  #8A8680;   /* 次要文字 */
+  --card:        #2C2B27;   /* 商品 */
+  --card-img:    #222120;   /* 商品圖片區 */
+  --hover:       #3A3732;   /* hover 色 */
+  --accent:      #C4A882;   
+  --border:      #3A3732;   /* 框 */
+  --text:        #E8E2DB;   /* 文字1 */
+  --text-muted:  #8A8680;   /* 文字2 */
   --radius:      6px;
 }
 
@@ -27,7 +27,7 @@ body {
   flex-direction: column;
 }
 
-/* ── HEADER ───────────────────────────────────────────── */
+
 header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
@@ -99,7 +99,7 @@ header {
   animation: badge-bounce 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-/* ── NAV ──────────────────────────────────────────────── */
+
 nav {
   background: var(--surface-mid);
   border-bottom: 1px solid var(--border);
@@ -138,7 +138,7 @@ nav {
   position: relative;
   cursor: pointer;
   color: var(--text-muted);
-  padding-bottom: 8px; /* 橋接 submenu 上方空白，hover 不中斷 */
+  padding-bottom: 8px; 
 }
 
 .nav-label {
@@ -153,10 +153,10 @@ nav {
   transform: scale(1.12);
 }
 
-/* ── SUBMENU ──────────────────────────────────────────── */
+
 .submenu {
   position: absolute;
-  top: 100%; /* li 的 padding-bottom 已橋接，不需額外 gap */
+  top: 100%; 
   left: 50%;
   transform: translateX(-50%) translateY(-4px);
   background: var(--surface);
@@ -192,13 +192,13 @@ nav {
   color: var(--text);
 }
 
-/* ── PAGE BODY ────────────────────────────────────────── */
+
 .page-body {
   display: flex;
   flex: 1;
 }
 
-/* ── SIDEBAR ──────────────────────────────────────────── */
+
 aside {
   width: 240px;
   min-width: 240px;
@@ -250,7 +250,6 @@ aside {
   letter-spacing: 0.08em;
 }
 
-/* ── MAIN CONTENT ─────────────────────────────────────── */
 main {
   flex: 1;
   padding: 36px 32px;
@@ -265,7 +264,6 @@ main {
   gap: 20px;
 }
 
-/* ── CATEGORY SECTIONS ────────────────────────────────── */
 .category-section {
   padding-bottom: 40px;
   scroll-margin-top: 160px;
@@ -310,7 +308,7 @@ main {
   margin-bottom: 14px;
 }
 
-/* ── PRODUCT CARD ─────────────────────────────────────── */
+
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -418,7 +416,7 @@ main {
   flex-shrink: 0;
 }
 
-/* ── FOOTER ───────────────────────────────────────────── */
+
 footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
@@ -452,7 +450,6 @@ footer a:hover {
   opacity: 0.4;
 }
 
-/* ── TOAST ────────────────────────────────────────────── */
 #toast {
   position: fixed;
   bottom: 32px;
@@ -475,7 +472,6 @@ footer a:hover {
   transform: translateY(0);
 }
 
-/* ── ANIMATIONS ───────────────────────────────────────── */
 @keyframes card-in {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -489,7 +485,6 @@ footer a:hover {
   100% { transform: scale(1); }
 }
 
-/* ── RIPPLE ───────────────────────────────────────────── */
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -503,7 +498,6 @@ footer a:hover {
   to { transform: scale(1); opacity: 0; }
 }
 
-/* ── HEADER 右側（登入/會員） ────────────────────────── */
 .header-right {
   display: flex;
   align-items: center;
@@ -601,7 +595,6 @@ footer a:hover {
 }
 .header-logout-btn:hover { color: var(--accent); border-color: var(--accent); }
 
-/* ── MODAL OVERLAY ────────────────────────────────────── */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -640,7 +633,6 @@ footer a:hover {
 }
 .modal-x:hover { color: var(--text); }
 
-/* ── AUTH MODAL ───────────────────────────────────────── */
 .modal-tabs {
   display: flex;
   gap: 0;
@@ -714,7 +706,7 @@ footer a:hover {
 }
 .form-submit:hover { opacity: 0.85; }
 
-/* ── CART DRAWER ──────────────────────────────────────── */
+
 .drawer-overlay {
   position: fixed;
   inset: 0;
@@ -784,6 +776,14 @@ footer a:hover {
   min-height: 180px;
   color: var(--text-muted);
   font-size: 0.9rem;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.cart-empty .btn-accent {
+  width: auto !important;
+  flex: none !important;
+  padding: 10px 32px;
 }
 
 .cart-item {
@@ -843,7 +843,6 @@ footer a:hover {
 }
 .cart-remove:hover { color: #e08080; }
 
-/* ── CHECKOUT MODAL ───────────────────────────────────── */
 .checkout-modal { max-width: 480px; }
 .modal-title {
   font-family: 'Noto Serif TC', serif;
@@ -882,7 +881,6 @@ footer a:hover {
 }
 .modal-actions { display: flex; gap: 12px; margin-top: 20px; }
 
-/* ── BUTTON VARIANTS ──────────────────────────────────── */
 .btn-accent {
   flex: 1;
   background: var(--accent);
@@ -912,8 +910,42 @@ footer a:hover {
 }
 .btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
 
-/* ── TOAST error variant ──────────────────────────────── */
+
 #toast.error {
   border-color: rgba(200, 80, 80, 0.6);
   color: #e09090;
+}
+
+
+@media (max-width: 1024px) {
+  header {
+    padding: 0 16px;
+    height: 72px;
+  }
+  .store-name { font-size: 1.6rem; }
+  .cart-btn { padding: 8px 14px; font-size: 0.88rem; }
+  .type { gap: 24px; padding: 12px 16px; }
+  main { padding: 24px 20px; }
+  footer { padding: 0 20px; font-size: 0.8rem; }
+}
+
+@media (max-width: 768px) {
+  header { height: 60px; padding: 0 12px; }
+  .store-name { font-size: 1.3rem; }
+  .header-auth-btn { display: none; }
+  .shop-link { padding: 6px 10px; font-size: 0.78rem; }
+  .cart-btn { padding: 7px 12px; font-size: 0.82rem; gap: 6px; }
+  .cart-btn svg { width: 18px; height: 18px; }
+  .type { gap: 12px; font-size: 0.95rem; padding: 10px 12px; }
+  .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  main { padding: 16px 12px; }
+  footer {
+    flex-direction: column;
+    height: auto;
+    padding: 16px;
+    gap: 8px;
+    text-align: center;
+  }
+  .footer-sep { margin: 0 6px; }
+  aside { display: none; }
 }

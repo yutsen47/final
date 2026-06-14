@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>商品詳情 — 店名</title>
+  <title>商品詳情</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/product.css" />
 </head>
 <body>
 
 <header>
-  <a href="index.html" class="store-name">店名</a>
+  <a href="index.html" class="store-name">療癒書屋</a>
   <div class="header-right">
     <a href="shop.html" class="shop-link">全部商品</a>
     <button class="header-auth-btn" id="auth-btn">登入 / 註冊</button>
@@ -66,7 +66,7 @@
   </ul>
 </nav>
 
-<!-- ===== BREADCRUMB ===== -->
+
 <div class="pd-breadcrumb" id="pd-breadcrumb">
   <a href="index.html">首頁</a>
   <span class="bc-sep">›</span>
@@ -75,26 +75,26 @@
   <span id="bc-product">商品名稱</span>
 </div>
 
-<!-- ===== MAIN PRODUCT SECTION ===== -->
+
 <main class="pd-main">
 
-  <!-- LEFT: image gallery -->
+  
   <div class="pd-gallery">
     <div class="pd-main-img-wrap">
       <img id="pd-main-img" src="" alt="商品圖片" />
     </div>
     <div class="pd-thumbs" id="pd-thumbs">
-      <!-- thumbnails injected by JS (for now, single image) -->
+      
     </div>
   </div>
 
-  <!-- RIGHT: info panel -->
+  
   <div class="pd-info">
 
     <p class="pd-category-tag" id="pd-cat-tag">分類</p>
     <h1 class="pd-name" id="pd-name">商品名稱</h1>
 
-    <!-- Star rating summary -->
+    
     <div class="pd-rating-row">
       <div class="pd-stars" id="pd-stars-summary">
         <span class="star filled">★</span>
@@ -114,7 +114,7 @@
 
     <div class="pd-divider"></div>
 
-    <!-- Description -->
+    
     <div class="pd-desc-block">
       <h3 class="pd-desc-title">商品介紹</h3>
       <p class="pd-desc-text" id="pd-desc">
@@ -122,15 +122,15 @@
       </p>
     </div>
 
-    <!-- Specs table -->
+    
     <div class="pd-specs-block" id="pd-specs-block">
       <h3 class="pd-desc-title">商品規格</h3>
       <table class="pd-specs-table" id="pd-specs-table">
-        <!-- rows injected by JS -->
+        
       </table>
     </div>
 
-    <!-- Qty + Add to cart -->
+    
     <div class="pd-actions">
       <div class="pd-qty-wrap">
         <button class="pd-qty-btn" id="qty-minus">－</button>
@@ -145,35 +145,33 @@
       </button>
     </div>
 
-    <!-- Tags -->
+   
     <div class="pd-tags" id="pd-tags"></div>
 
   </div>
 </main>
 
-<!-- ===== REVIEWS SECTION ===== -->
+
 <section class="pd-reviews-section">
   <div class="pd-reviews-inner">
     <h2 class="pd-reviews-title">買家評價</h2>
 
-    <!-- Rating breakdown -->
+    
     <div class="pd-rating-breakdown" id="pd-rating-breakdown">
       <div class="pd-big-score">
         <span class="pbs-number" id="pbs-number">4.5</span>
-        <div class="pbs-stars" id="pbs-stars"></div>
-        <span class="pbs-total" id="pbs-total">12 則評價</span>
-      </div>
+          <div class="pbs-stars" id="pbs-stars"></div>
+          <span class="pbs-total" id="pbs-total">12 則評價</span>
+          </div>
       <div class="pd-bar-chart" id="pd-bar-chart">
-        <!-- 5 bars injected by JS -->
-      </div>
+        
     </div>
+  </div>
 
-    <!-- Review list -->
-    <div class="pd-review-list" id="pd-review-list">
-      <!-- review cards injected by JS -->
-    </div>
+    
+    <div class="pd-review-list" id="pd-review-list"></div>
 
-    <!-- Write review -->
+
     <div class="pd-write-review">
       <h3 class="pd-write-title">撰寫評價</h3>
       <div class="pd-star-picker" id="pd-star-picker">
@@ -190,7 +188,7 @@
   </div>
 </section>
 
-<!-- ===== RELATED PRODUCTS ===== -->
+
 <section class="pd-related-section">
   <div class="pd-related-inner">
     <h2 class="pd-section-title">同類商品</h2>
@@ -206,14 +204,14 @@
     <span class="footer-sep">|</span>
     <a href="#">地址</a>
   </span>
-  <span class="footer-copy">© 2026 店名. All rights reserved.</span>
+  <span class="footer-copy">© 2026 療癒書屋. All rights reserved.</span>
 </footer>
 
 <div id="toast"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/sql-wasm.js"></script>
-<script src="data.js"></script>
-<script src="shared.js"></script>
-<script src="product.js"></script>
+<script src="js/data.js"></script>
+<script src="js/shared.js"></script>
+<script src="js/product.js"></script>
 </body>
 </html>

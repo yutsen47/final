@@ -71,3 +71,20 @@ about-intro{
   color: var(--text);
   margin-bottom: 8px;
 }
+
+
+@media (max-width: 1024px) {
+  .about-main { margin: 40px auto; }
+  .about-grid { gap: 20px; }
+}
+
+@media (max-width: 768px) {
+  .about-main { margin: 24px auto; padding: 0 16px; }
+  .about-title { font-size: 1.4rem; margin-bottom: 24px; }
+  .about-grid {
+    flex-direction: column; 
+    gap: 16px;
+  }
+  .about-card { padding: 20px; min-width: unset; }
+  .about-num { width: 64px; height: 64px; font-size: 1.4rem; }
+}

@@ -1,9 +1,4 @@
-/* ============================================================
-   product.css  ─  商品詳細頁樣式
-   依賴 style.css 中已定義的 header / nav / footer / product-card
-   ============================================================ */
 
-/* ── Breadcrumb ─────────────────────────────────────────── */
 .pd-breadcrumb {
   max-width: 1160px;
   margin: 18px auto 0;
@@ -565,14 +560,25 @@
   display: inline-block;
 }
 
-/* ── Responsive ─────────────────────────────────────────── */
-@media (max-width: 780px) {
+@media (max-width: 1024px) {
+  .pd-main { gap: 32px; padding: 0 20px; }
+  .pd-name { font-size: 1.5rem; }
+}
+
+@media (max-width: 768px) {
+  .pd-breadcrumb { padding: 0 12px; margin-top: 12px; }
   .pd-main {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 20px;
     margin-top: 16px;
+    padding: 0 12px;
   }
-  .pd-main-img-wrap { aspect-ratio: 1 / 1; }
-  .pd-rating-breakdown { gap: 24px; }
-  .pd-add-cart-btn { min-width: 120px; }
+  .pd-name { font-size: 1.3rem; }
+  .pd-price { font-size: 1.6rem; }
+  .pd-actions { flex-wrap: wrap; }
+  .pd-add-cart-btn { min-width: 120px; flex: 1; }
+  .pd-rating-breakdown { flex-direction: column; gap: 20px; }
+  .pd-reviews-inner { padding: 0 12px; }
+  .pd-write-review { padding: 18px; }
+  .pd-related-inner { padding: 0 12px; }
 }

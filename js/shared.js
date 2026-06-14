@@ -247,7 +247,11 @@ function renderCart() {
   if (!body) return;
 
   if (!currentUser) {
-    body.innerHTML = `<div class="cart-empty"><p>請先登入才能使用購物車</p><button class="btn-accent" onclick="hideCartDrawer();showAuthModal()">前往登入</button></div>`;
+    body.innerHTML = `
+      <div class="cart-empty">
+        <p>請先登入才能使用購物車</p>
+        <button class="btn-accent" onclick="hideCartDrawer();showAuthModal()">前往登入</button>
+      </div>`;
     if (totEl) totEl.textContent = '';
     goBtn?.setAttribute('hidden','');
     return;
@@ -362,7 +366,7 @@ function setupEvents() {
   });
 }
 
-// ── 初始化 ───────────────────────────────────────────────
+
 window.APP_READY = (async () => {
   const SQL = await initSqlJs({
     locateFile: f => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.2/${f}`
