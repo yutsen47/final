@@ -60,16 +60,25 @@
 }
 
 .about-role {
-  font-size: 0.82rem;
+  font-size: 1rem;
   color: var(--text-muted);
   margin-bottom: 4px;
+  padding-bottom: 10px;
 }
 
 about-intro{
   font-family: 'Noto Serif TC', serif;
   font-size: 1.1rem;
   color: var(--text);
-  margin-bottom: 8px;
+  margin-bottom: 8px
+}
+
+.about-exper {
+  font-size: 0.9rem;
+  color: #E8E2DB ;
+  margin-bottom: 4px;
+  border-top: 2px solid var(--accent);
+  padding-top: 10px;
 }
 
 

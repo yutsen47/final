@@ -69,6 +69,7 @@ header {
   overflow: visible;
 }
 
+
 .cart-btn:hover {
   background: var(--hover);
   border-color: var(--accent);
@@ -516,6 +517,8 @@ footer a:hover {
   cursor: pointer;
   transition: color 0.2s, border-color 0.2s;
 }
+
+
 .header-auth-btn:hover { color: var(--accent); border-color: var(--accent); }
 
 .header-user {
