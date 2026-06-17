@@ -1,11 +1,3 @@
-/* ============================================================
-   product.js  ─  商品詳細頁邏輯
-   依賴：data.js (CATEGORIES, BESTSELLER_IDS)
-         shared.js (購物車、toast、header 相關)
-   URL 參數：?id=<product_id>
-   ============================================================ */
-
-/* ---------- 靜態資料補充（介紹、規格、標籤、庫存） ---------- */
 
 const PRODUCT_EXTRA = {
   // 書本
@@ -92,7 +84,6 @@ const PRODUCT_REVIEWS = {
     { author:'器物迷', rating:4, date:'2026-05-14', text:'值得入手', verified:true },
   ],
 };
-/* ---------- 工具函式 ---------- */
 
 function getParam(key) {
   return new URLSearchParams(location.search).get(key);
@@ -126,8 +117,6 @@ function avgRating(reviews) {
   return reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
 }
 
-/* ---------- 主流程 ---------- */
-
 document.addEventListener('DOMContentLoaded', () => {
   const id = parseInt(getParam('id'), 10);
   if (!id) { location.href = 'shop.html'; return; }
@@ -139,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const extra = PRODUCT_EXTRA[id] || {};
   const reviews = [...(PRODUCT_REVIEWS[id] || [])];
 
-  // ---------- 基本資訊 ----------
+
   document.title = `${product.name} — 店名`;
 
   document.getElementById('bc-category').textContent = cat.name;
@@ -149,19 +138,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('pd-price').textContent = product.price;
   document.getElementById('pd-desc').textContent = extra.desc || '精選商品，品質保證。';
 
-  // 圖片
   const mainImg = document.getElementById('pd-main-img');
   mainImg.src = product.img;
   mainImg.alt = product.name;
 
-  // 縮圖（目前只有一張，之後可擴充）
+
   const thumbsWrap = document.getElementById('pd-thumbs');
   const thumb = document.createElement('div');
   thumb.className = 'pd-thumb active';
   thumb.innerHTML = `<img src="${product.img}" alt="${product.name}" />`;
   thumbsWrap.appendChild(thumb);
 
-  // 規格
   const specsTable = document.getElementById('pd-specs-table');
   (extra.specs || []).forEach(([label, value]) => {
     const tr = document.createElement('tr');
@@ -172,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('pd-specs-block').style.display = 'none';
   }
 
-  // 標籤
+
   const tagsWrap = document.getElementById('pd-tags');
   (extra.tags || []).forEach(tag => {
     const span = document.createElement('span');
@@ -181,13 +168,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tagsWrap.appendChild(span);
   });
 
-  // ---------- 評分 ----------
   renderRating(reviews);
-
-  // ---------- 評論列表 ----------
   renderReviews(reviews);
 
-  // ---------- 加入購物車 ----------
   const qtyInput = document.getElementById('pd-qty');
   document.getElementById('qty-minus').onclick = () => {
     if (parseInt(qtyInput.value) > 1) qtyInput.value = parseInt(qtyInput.value) - 1;
@@ -204,14 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // 收藏按鈕（視覺 toggle）
   const wishBtn = document.getElementById('pd-wishlist');
   wishBtn.onclick = () => {
     wishBtn.classList.toggle('active');
     showToast(wishBtn.classList.contains('active') ? '已加入收藏' : '已移除收藏');
   };
 
-  // ---------- 同類商品 ----------
+
   const related = sub.products.filter(p => p.id !== id).slice(0, 4);
   const grid = document.getElementById('pd-related-grid');
   if (related.length) {
@@ -236,8 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     document.querySelector('.pd-related-section').style.display = 'none';
   }
-
-  // ---------- 撰寫評價 ----------
   let pickedStar = 0;
   const stars = document.querySelectorAll('.pick-star');
   stars.forEach(s => {
@@ -273,8 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showToast('感謝您的評價！');
   };
 });
-
-/* ---------- 評分渲染 ---------- */
 function renderRating(reviews) {
   const avg = avgRating(reviews);
   const total = reviews.length;
@@ -283,7 +261,6 @@ function renderRating(reviews) {
   document.getElementById('pd-rating-score').textContent = rounded.toFixed(1);
   document.getElementById('pd-rating-count').textContent = `（${total} 則評價）`;
 
-  // 頂部星星
   const summaryStars = document.getElementById('pd-stars-summary');
   summaryStars.innerHTML = '';
   for (let i = 1; i <= 5; i++) {
@@ -293,7 +270,7 @@ function renderRating(reviews) {
     summaryStars.appendChild(s);
   }
 
-  // 大數字區
+
   document.getElementById('pbs-number').textContent = rounded.toFixed(1);
   document.getElementById('pbs-total').textContent = `${total} 則評價`;
   const pbsStars = document.getElementById('pbs-stars');
@@ -305,7 +282,7 @@ function renderRating(reviews) {
     pbsStars.appendChild(s);
   }
 
-  // 長條圖
+
   const counts = [0, 0, 0, 0, 0];
   reviews.forEach(r => { if (r.rating >= 1 && r.rating <= 5) counts[r.rating - 1]++; });
   const chart = document.getElementById('pd-bar-chart');
@@ -322,7 +299,6 @@ function renderRating(reviews) {
   }
 }
 
-/* ---------- 評論列表渲染 ---------- */
 function renderReviews(reviews) {
   const list = document.getElementById('pd-review-list');
   list.innerHTML = '';
@@ -358,7 +334,6 @@ function renderReviews(reviews) {
   });
 }
 
-/* ---------- Toast（若 shared.js 未提供則自行定義） ---------- */
 function showToast(msg) {
   const t = document.getElementById('toast');
   if (!t) return;

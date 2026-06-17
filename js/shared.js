@@ -1,6 +1,5 @@
 'use strict';
 
-// ── DB 工具（sql.js） ────────────────────────────────────
 let db = null;
 
 function saveDB() {
@@ -41,12 +40,10 @@ function nowStr() {
   return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
 
-// ── State ────────────────────────────────────────────────
 let currentUser = null;
 let cartItems   = [];
 let toastTimer;
 
-// ── Session（localStorage） ──────────────────────────────
 function loadSession() {
   try {
     const s = localStorage.getItem('store_session');
@@ -60,9 +57,9 @@ function saveSession(user) {
   else      localStorage.removeItem('store_session');
 }
 
-// ── Auth ─────────────────────────────────────────────────
+
 function dbRegister(username, email, password) {
-  if (!username?.trim() || !password) return { error: '帳號與密碼為必填' };
+  if (!username?.trim() || !password) return { error: '帳號與密碼必填' };
   username = username.trim();
   if (queryOne('SELECT id FROM users WHERE username = ?', [username])) return { error: '此帳號已存在' };
   const id   = insertSQL('INSERT INTO users (username,email,password,created_at) VALUES (?,?,?,?)', [username, email||'', password, nowStr()]);
@@ -75,7 +72,6 @@ function dbLogin(username, password) {
   return user ? { success: true, user } : { error: '帳號或密碼錯誤' };
 }
 
-// ── Cart ─────────────────────────────────────────────────
 function reloadCart() {
   cartItems = currentUser
     ? queryAll('SELECT * FROM cart_items WHERE user_id = ?', [currentUser.id])
@@ -114,7 +110,6 @@ function dbCheckout() {
   return { success: true, orderId, total };
 }
 
-// ── Toast ────────────────────────────────────────────────
 function showToast(msg, type = '') {
   const t = document.getElementById('toast');
   if (!t) return;
@@ -124,7 +119,7 @@ function showToast(msg, type = '') {
   toastTimer = setTimeout(() => (t.className = ''), 2400);
 }
 
-// ── Ripple ───────────────────────────────────────────────
+
 function createRipple(e, el) {
   el.querySelector('.ripple')?.remove();
   const r = document.createElement('span');
@@ -135,8 +130,6 @@ function createRipple(e, el) {
   el.appendChild(r);
   r.addEventListener('animationend', () => r.remove());
 }
-
-// ── Header ───────────────────────────────────────────────
 function updateHeader(user) {
   const authBtn  = document.getElementById('auth-btn');
   const userInfo = document.getElementById('user-info');
@@ -160,7 +153,6 @@ function updateBadge() {
   if (total > 0) { badge.classList.remove('bounce'); void badge.offsetWidth; badge.classList.add('bounce'); }
 }
 
-// ── Modal 注入 ───────────────────────────────────────────
 function injectModals() {
   document.body.insertAdjacentHTML('beforeend', `
     <div class="modal-overlay" id="auth-overlay">
