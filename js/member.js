@@ -11,21 +11,15 @@ function loadMemberPage() {
 
   prompt.setAttribute('hidden', '');
   content.removeAttribute('hidden');
-
-  // 個人資料（不可編輯部分）
   document.getElementById('profile-avatar').textContent = currentUser.username.charAt(0).toUpperCase();
   document.getElementById('profile-name').textContent   = currentUser.username;
   document.getElementById('profile-since').textContent  = `加入日期：${currentUser.created_at?.split(' ')[0] || '—'}`;
-
-  // 已登入時隱藏「前往登入」按鈕（若頁面上有）
   document.querySelectorAll('[onclick="showAuthModal()"]').forEach(el => el.setAttribute('hidden', ''));
-
-  // 可編輯欄位預填
   document.getElementById('edit-email').value   = currentUser.email   || '';
   document.getElementById('edit-phone').value   = currentUser.phone   || '';
   document.getElementById('edit-address').value = currentUser.address || '';
 
-  // 訂單記錄
+
   const orders  = queryAll('SELECT * FROM orders WHERE user_id = ? ORDER BY id DESC', [currentUser.id]);
   const listEl  = document.getElementById('orders-list');
   const emptyEl = document.getElementById('orders-empty');
@@ -64,7 +58,7 @@ function loadMemberPage() {
   }).join('');
 }
 
-// 儲存個人資料
+
 document.addEventListener('submit', e => {
   if (e.target.id !== 'profile-edit-form') return;
   e.preventDefault();
@@ -89,17 +83,15 @@ document.addEventListener('submit', e => {
   showToast('個人資料已更新');
 });
 
-// 登出後重新渲染
+
 document.addEventListener('click', e => {
   if (e.target.closest('#logout-btn')) setTimeout(() => loadMemberPage(), 0);
 });
 
-// 登入/註冊後重新渲染
 document.addEventListener('submit', e => {
   if (e.target.id === 'login-form' || e.target.id === 'register-form') {
     setTimeout(() => loadMemberPage(), 100);
   }
 });
 
-// ── 等待 DB 初始化完成後再渲染（修正 timing bug） ───────
 window.APP_READY.then(() => loadMemberPage());

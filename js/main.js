@@ -80,7 +80,6 @@ function renderAll() {
   });
 }
 
-// Nav 捲動（shop.html 專用）
 document.querySelector('nav').addEventListener('click', e => {
   const subItem = e.target.closest('li[data-sub-id]');
   if (subItem) {
@@ -96,7 +95,7 @@ document.querySelector('nav').addEventListener('click', e => {
   }
 });
 
-renderAll();  // 先建好所有區塊
+renderAll(); 
 
 window.addEventListener('load', () => {
   if (location.hash) {

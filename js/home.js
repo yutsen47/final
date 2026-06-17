@@ -1,4 +1,3 @@
-// ── 工具 ────────────────────────────────────────────────
 function shuffle(arr) {
   return [...arr].sort(() => Math.random() - 0.5);
 }
@@ -11,7 +10,7 @@ function flatProducts() {
   );
 }
 
-// ── 輪播廣告 ─────────────────────────────────────────────
+
 const CAROUSEL_INTERVAL = 4000;
 const carouselProducts = shuffle(flatProducts()).slice(0, 3);
 let current = 0;
@@ -82,7 +81,6 @@ function renderCarousel() {
   startAuto();
 }
 
-// ── 暢銷商品 ─────────────────────────────────────────────
 function renderBestsellers() {
   const all  = flatProducts();
   const grid = document.getElementById('bestsellers-grid');
@@ -122,7 +120,7 @@ function renderBestsellers() {
   });
 }
 
-// ── Nav（首頁跳到 shop.html） ────────────────────────────
+
 document.querySelector('nav').addEventListener('click', e => {
   const subItem = e.target.closest('.submenu li');
   if (subItem) {
