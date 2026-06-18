@@ -1,6 +1,11 @@
 'use strict';
-
+let currentUser = null;
+let cartItems   = [];
+let toastTimer;
 let db = null;
+
+const SHIPPING_FEE = 60;
+const FREE_SHIPPING_THRESHOLD = 1000;
 
 function saveDB() {
   const data = db.export();
@@ -39,10 +44,6 @@ function nowStr() {
   const p = n => String(n).padStart(2, '0');
   return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
 }
-
-let currentUser = null;
-let cartItems   = [];
-let toastTimer;
 
 function loadSession() {
   try {
@@ -99,8 +100,10 @@ function dbRemoveCart(id) {
 
 function dbCheckout() {
   if (!currentUser || !cartItems.length) return { error: '購物車是空的' };
-  const total   = cartItems.reduce((s, i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
-  const orderId = insertSQL('INSERT INTO orders (user_id,total,status,created_at) VALUES (?,?,?,?)', [currentUser.id, total, 'completed', nowStr()]);
+  const subtotal = cartItems.reduce((s, i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+  const total    = subtotal + shipping;
+  const orderId  = insertSQL('INSERT INTO orders (user_id,total,status,created_at) VALUES (?,?,?,?)', [currentUser.id, total, 'completed', nowStr()]);
   for (const item of cartItems) {
     insertSQL('INSERT INTO order_items (order_id,product_id,name,price,img,quantity) VALUES (?,?,?,?,?,?)',
       [orderId, item.product_id, item.name, item.price, item.img, item.quantity]);
@@ -206,7 +209,7 @@ function injectModals() {
   `);
 }
 
-// ── Auth Modal ───────────────────────────────────────────
+
 function showAuthModal(tab = 'login') {
   document.getElementById('auth-overlay').classList.add('visible');
   switchTab(tab);
@@ -228,7 +231,6 @@ function setAuthErr(msg) {
   msg ? el.removeAttribute('hidden') : el.setAttribute('hidden','');
 }
 
-// ── Cart Drawer ──────────────────────────────────────────
 function showCartDrawer() { renderCart(); document.getElementById('cart-overlay').classList.add('visible'); }
 function hideCartDrawer() { document.getElementById('cart-overlay').classList.remove('visible'); }
 
@@ -236,6 +238,7 @@ function renderCart() {
   const body  = document.getElementById('cart-body');
   const totEl = document.getElementById('cart-total');
   const goBtn = document.getElementById('go-checkout');
+
   if (!body) return;
 
   if (!currentUser) {
@@ -254,7 +257,10 @@ function renderCart() {
     goBtn?.setAttribute('hidden','');
     return;
   }
-  const total = cartItems.reduce((s,i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
+  const subtotal = cartItems.reduce((s,i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+  const total    = subtotal + shipping;
+
   body.innerHTML = cartItems.map(item => `
     <div class="cart-item">
       <img src="${item.img}" class="cart-item-img" alt="${item.name}" />
@@ -269,14 +275,26 @@ function renderCart() {
       </div>
       <button class="cart-remove" data-id="${item.id}">✕</button>
     </div>`).join('');
-  if (totEl) totEl.textContent = `合計 NT$ ${total.toLocaleString()}`;
-  goBtn?.removeAttribute('hidden');
-}
 
-// ── Checkout Modal ───────────────────────────────────────
+    const shippingNote = shipping === 0
+      ? `<div class="cart-shipping-note free">🎉 已滿 NT$ ${FREE_SHIPPING_THRESHOLD.toLocaleString()}，享免運優惠！</div>`
+      : `<div class="cart-shipping-note">還差 NT$ ${(FREE_SHIPPING_THRESHOLD - subtotal).toLocaleString()} 即可免運（目前運費 NT$ ${shipping}）</div>`;
+    body.insertAdjacentHTML('beforeend', shippingNote);
+
+    if (totEl) {
+      totEl.innerHTML = `
+        <span class="cart-subtotal-line">小計 NT$ ${subtotal.toLocaleString()}</span>
+        <span class="cart-shipping-line">運費 ${shipping === 0 ? '免運' : 'NT$ ' + shipping}</span>
+        <span class="cart-total-line">合計 NT$ ${total.toLocaleString()}</span>
+      `;
+    }
+    goBtn?.removeAttribute('hidden');
+  }
 function showCheckoutModal() {
   if (!cartItems.length) return;
-  const total = cartItems.reduce((s,i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
+  const subtotal = cartItems.reduce((s,i) => s + parseInt(i.price.replace(/[^\d]/g,'')) * i.quantity, 0);
+  const shipping = subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+  const total    = subtotal + shipping;
   const el = document.getElementById('checkout-items');
   const tl = document.getElementById('checkout-total');
   if (el) el.innerHTML = cartItems.map(i => `
@@ -286,7 +304,11 @@ function showCheckoutModal() {
       <span class="checkout-row-qty">× ${i.quantity}</span>
       <span class="checkout-row-price">${i.price}</span>
     </div>`).join('');
-  if (tl) tl.textContent = `總計 NT$ ${total.toLocaleString()}`;
+  if (tl) tl.innerHTML = `
+    <div class="checkout-sub-row">小計 NT$ ${subtotal.toLocaleString()}</div>
+    <div class="checkout-sub-row">運費 ${shipping === 0 ? '免運' : 'NT$ ' + shipping}</div>
+    <div class="checkout-total-row">總計 NT$ ${total.toLocaleString()}</div>
+  `;
   const ov = document.getElementById('checkout-overlay');
   if (ov) { ov.style.display = ''; ov.classList.add('visible'); }
 }
@@ -294,7 +316,6 @@ function hideCheckoutModal() {
   document.getElementById('checkout-overlay')?.classList.remove('visible');
 }
 
-// ── Global Events ────────────────────────────────────────
 function setupEvents() {
   document.addEventListener('click', e => {
     const addBtn = e.target.closest('.add-cart-btn');

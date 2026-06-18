@@ -100,6 +100,52 @@ header {
   animation: badge-bounce 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
+.cart-shipping-note {
+  margin: 0 16px 12px;
+  padding: 8px 12px;
+  background: var(--hover);
+  border-radius: var(--radius);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+.cart-shipping-note.free {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.cart-total-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cart-subtotal-line,
+.cart-shipping-line {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.cart-total-line {
+  font-size: 1rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.checkout-sub-row {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: right;
+  padding: 2px 0;
+}
+.checkout-total-row {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-align: right;
+  padding-top: 6px;
+}
+
 
 nav {
   background: var(--surface-mid);
