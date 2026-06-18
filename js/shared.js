@@ -429,7 +429,6 @@ window.APP_READY = (async () => {
       quantity INTEGER NOT NULL
     );
   `);
-  // Migration：舊資料庫補欄位（已存在時 catch 忽略）
   try { db.run("ALTER TABLE users ADD COLUMN phone   TEXT DEFAULT ''"); } catch {}
   try { db.run("ALTER TABLE users ADD COLUMN address TEXT DEFAULT ''"); } catch {}
   saveDB();
