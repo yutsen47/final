@@ -179,11 +179,17 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   document.getElementById('pd-add-cart').onclick = () => {
-    const qty = Math.max(1, parseInt(qtyInput.value) || 1);
-    if (typeof addToCart === 'function') {
-      for (let i = 0; i < qty; i++) addToCart(product);
-      showToast(`已加入購物車：${product.name} × ${qty}`);
+    if (!currentUser) {
+      showAuthModal();
+      showToast('請先登入才能加入購物車', 'error');
+      return;
     }
+    const qty = Math.max(1, parseInt(qtyInput.value) || 1);
+    for (let i = 0; i < qty; i++) {
+      dbAddToCart(product.id, product.name, product.price, product.img);
+    }
+    updateBadge();
+    showToast(`✓ 已加入購物車：${product.name} × ${qty}`);
   };
 
   const wishBtn = document.getElementById('pd-wishlist');
@@ -206,12 +212,15 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="card-body">
           <p class="card-name">${p.name}</p>
           <p class="card-price">${p.price}</p>
-          <button class="card-add-btn" data-id="${p.id}">加入購物車</button>
+          <button
+            class="card-add-btn add-cart-btn"
+            data-id="${p.id}"
+            data-name="${p.name}"
+            data-price="${p.price}"
+            data-img="${p.img}">
+            加入購物車
+          </button>
         </div>`;
-      card.querySelector('.card-add-btn').onclick = () => {
-        if (typeof addToCart === 'function') addToCart(p);
-        showToast(`已加入購物車：${p.name}`);
-      };
       grid.appendChild(card);
     });
   } else {
