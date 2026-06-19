@@ -125,7 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const { product, cat, sub } = found;
   const extra = PRODUCT_EXTRA[id] || {};
-  const reviews = [...(PRODUCT_REVIEWS[id] || [])];
+  const STORAGE_KEY = `reviews_${id}`;
+  const savedReviews = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  const reviews = [...savedReviews, ...(PRODUCT_REVIEWS[id] || [])];
 
 
   document.title = `${product.name} — 店名`;
@@ -252,6 +254,12 @@ document.addEventListener('DOMContentLoaded', () => {
       text, verified: false,
     };
     reviews.unshift(newReview);
+
+    // 將使用者評論寫入 localStorage，重整後仍可保留
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+    saved.unshift(newReview);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+
     renderRating(reviews);
     renderReviews(reviews);
     document.getElementById('pd-review-author').value = '';

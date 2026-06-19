@@ -21,15 +21,17 @@ function buildSlide(p, index) {
   div.className = 'carousel-slide' + (index === 0 ? ' active' : '');
   div.innerHTML = `
     <div class="slide-bg" style="background-image:url('${p.img}')"></div>
-    <img class="slide-img" src="${p.img}" alt="${p.name}" />
     <div class="slide-overlay">
-      <div class="slide-content">
-        <span class="slide-badge">精選推薦</span>
+      <div class="slide-center">
+        <img class="slide-img" src="${p.img}" alt="${p.name}" />
+      </div>
+      <div class="slide-info">
         <h2 class="slide-name">${p.name}</h2>
-        <p class="slide-price">${p.price}</p>
-        <a href="product.html?id=${p.id}">
-          <img class="slide-img" src="${p.img}" alt="${p.name}" />
-        </a>
+        <div class="slide-meta">
+          <span class="slide-badge">精選推薦</span>
+          <p class="slide-price">${p.price}</p>
+          <a href="product.html?id=${p.id}" class="slide-cta">立即購買</a>
+        </div>
       </div>
     </div>
   `;

@@ -393,6 +393,7 @@ main {
   border-radius: 2px;
 }
 
+
 .card:hover .card-img img {
   transform: scale(1.04);
 }
@@ -589,7 +590,6 @@ footer a:hover {
 
 .header-user-dropdown {
   position: relative;
-  padding-bottom: 10px;
 }
 
 .user-dropdown-menu {
@@ -643,7 +643,15 @@ footer a:hover {
   font-family: 'Noto Sans TC', sans-serif;
 }
 .header-logout-btn:hover { color: var(--accent); border-color: var(--accent); }
-
+.header-auth-btn,
+.header-user-link,
+.header-logout-btn {
+  height: 36px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -965,7 +973,6 @@ footer a:hover {
   color: #e09090;
 }
 
-
 @media (max-width: 1024px) {
   header {
     padding: 0 16px;
@@ -979,13 +986,45 @@ footer a:hover {
 }
 
 @media (max-width: 768px) {
-  header { height: 60px; padding: 0 12px; }
+    header {
+    height: auto;
+    min-height: 60px;
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 8px;
+  }
   .store-name { font-size: 1.3rem; }
-  .header-auth-btn { display: none; }
+  .header-right {
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .header-auth-btn,
+  .header-user-link,
+  .header-logout-btn {
+    height: 32px;
+    padding: 0 10px;
+    font-size: 0.75rem;
+  }
   .shop-link { padding: 6px 10px; font-size: 0.78rem; }
   .cart-btn { padding: 7px 12px; font-size: 0.82rem; gap: 6px; }
   .cart-btn svg { width: 18px; height: 18px; }
-  .type { gap: 12px; font-size: 0.95rem; padding: 10px 12px; }
+
+  .type {
+    gap: 18px;
+    font-size: 0.95rem;
+    padding: 10px 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content:center;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    
+  }
+  .type::-webkit-scrollbar { display: none; }
+  .type > li { flex-shrink: 0; }
+
   .product-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
   main { padding: 16px 12px; }
   footer {
@@ -997,4 +1036,60 @@ footer a:hover {
   }
   .footer-sep { margin: 0 6px; }
   aside { display: none; }
+
+  .card-img { aspect-ratio: 1 / 1; }
+  .card-name { font-size: 0.8rem; }
+  .price { font-size: 1rem; }
+  .add-cart-btn { font-size: 0.75rem; padding: 5px 10px; }
+}
+
+@media (max-width: 480px) {
+  header {
+  height: auto;
+  min-height: 60px;
+  padding: 10px 12px;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+}
+.store-name { font-size: 1.3rem; }
+.header-right {
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+  .shop-link { display: none; }
+  .header-auth-btn,
+  .header-user-link,
+  .header-logout-btn {
+    height: 30px;
+    padding: 0 8px;
+    font-size: 0.7rem;
+  }
+  .header-user-link span { display: none; }
+  .cart-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+  .cart-btn svg { width: 16px; height: 16px; }
+
+  .type {
+    gap: 10px;
+    font-size: 0.85rem;
+    padding: 8px 10px;
+    justify-content: center;
+  }
+  .nav-label { padding: 3px 6px; }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  main { padding: 12px 10px; gap: 24px; }
+
+  .ad-label { font-size: 1.8rem; }
+  .ad-sub { font-size: 0.68rem; }
+
+  footer { padding: 14px 10px; font-size: 0.72rem; }
 }
